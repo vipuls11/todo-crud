@@ -85,11 +85,17 @@ export const Todolist = () => {
       }
 
    
-    
+    const copyHandler =(name)=>{
+      let  newCopyItem = list.find((elem)=>{
+        return elem.name === name
+      })
+    // Copy the text inside the text field
+  navigator.clipboard.writeText(newCopyItem);
+    }
   
 
   return (
-    <div>
+    <div >
         <form action="" onSubmit={submithandle}>
             <input type="text" value={inputvalue}  onChange={Changehandler} placeholder="Enter Your list............"/>
             {toggle ? <button>Add</button>: <button>Edit</button>}
@@ -98,7 +104,7 @@ export const Todolist = () => {
         <ul>
             {/* {list} */}
             {list.map((todo)=>{
-                return <li onSelect={deleteHandler} id={todo.id}><p>{todo.name}</p><button onClick={()=>{deleteHandler(todo.id)}}>Delete</button><button onClick={()=>{editHandler(todo.id)}}>Edit</button><button>Copy</button></li>
+                return <li onSelect={deleteHandler} id={todo.id}><p>{todo.name}</p><button onClick={()=>{deleteHandler(todo.id)}}>Delete</button><button onClick={()=>{editHandler(todo.id)}}>Edit</button><button onClick={copyHandler(todo.name)}>Copy</button></li>
             })}
         </ul>
     </div>
